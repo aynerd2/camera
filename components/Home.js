@@ -10,6 +10,7 @@ import axios from 'axios';
 import { ActivityIndicator } from 'react-native-paper';
 import { ALERT_TYPE, Dialog, AlertNotificationRoot } from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Tts from 'react-native-tts';
 
 
 
@@ -81,9 +82,9 @@ const Home = () => {
         name: 'photo.jpg',
       });
 
-      const response = await axios.post('http://192.168.130.135:5000/predict', formData, {
+      const response = await axios.post('http://192.168.1.240:5000/predict', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data'
         },
       });
       console.log('Upload result:', response.data);
@@ -92,7 +93,7 @@ const Home = () => {
       const alertType = getAlertType(response.data.class);
       const previousResults = JSON.parse(await AsyncStorage.getItem('results')) || [];
       await AsyncStorage.setItem('results', JSON.stringify([...previousResults, { classDescription, confidence }]));
-
+      Tts.speak(`${classDescription}. Confidence: ${confidence.toFixed(2)}`);
       Dialog.show({
         type: alertType,
         title: 'RESULT',
@@ -183,6 +184,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+     backgroundColor: "#000000"
   },
   image: {
     width: 400,
@@ -193,6 +195,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
+    backgroundColor: "#000000"
   },
   icon: {
     marginHorizontal: 20,

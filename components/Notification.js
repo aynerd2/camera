@@ -34,20 +34,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+     backgroundColor: "#000000"
   },
   resultItem: {
     marginBottom: 16,
     padding: 16,
     borderRadius: 8,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#fff',
   },
   classText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#000000',
   },
   confidenceText: {
     fontSize: 14,
-    color: '#555',
+    color: '#000000',
   },
 });
 
